@@ -39,14 +39,14 @@ class ExampleService(CoreService):
     group: str = "Security"
     executables: Tuple[str, ...] = ()
     dependencies: Tuple[str, ...] = ()
-    dirs: Tuple[str, ...] = ()
-    configs: Tuple[str, ...] = (f"{x}" for x in ["/etc/snort/snort.conf"])
+    dirs: Tuple[str, ...] = tuple(f"{x}" for x in ["/var/log/snort"])
+    configs: Tuple[str, ...] = tuple(f"{x}" for x in ["/etc/snort/snort.conf"])
     startup: Tuple[str, ...] = tuple(f"{x}" for x in ["snort -c /etc/snort/snort.conf"])
-    validate: Tuple[str, ...] = (f"{x}" for x in ["pidof snort"])
+    validate: Tuple[str, ...] = tuple(f"{x}" for x in ["pidof snort"])
     validation_mode: ServiceMode = ServiceMode.NON_BLOCKING
     validation_timer: int = 5
     validation_period: float = 0.5
-    shutdown: Tuple[str, ...] = (f"{x}" for x in ["killall snort"])
+    shutdown: Tuple[str, ...] = tuple(f"{x}" for x in ["killall snort"])
 
     @classmethod
     def on_load(cls) -> None:

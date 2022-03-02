@@ -41,12 +41,12 @@ class ExampleService(CoreService):
     dependencies: Tuple[str, ...] = ()
     dirs: Tuple[str, ...] = tuple(f"{x}" for x in ["/etc/logstash/conf.d"])
     configs: Tuple[str, ...] = tuple(f"{x}" for x in ["/etc/logstash/default.conf"])
-    startup: Tuple[str, ...] = tuple(f"{x}" for x in ["logstash -f /etc/logstash/conf.d"])
-    validate: Tuple[str, ...] = tuple(f"{x}" for x in ["pidof logstash"])
+    startup: Tuple[str, ...] = tuple(f"{x}" for x in ["/usr/share/logstash/bin/logstash -f /etc/logstash/conf.d"])
+    validate: Tuple[str, ...] = tuple(f"{x}" for x in ["pidof java"])
     validation_mode: ServiceMode = ServiceMode.NON_BLOCKING
     validation_timer: int = 5
     validation_period: float = 0.5
-    shutdown: Tuple[str, ...] = tuple(f"{x}" for x in ["killall logstash"])
+    shutdown: Tuple[str, ...] = tuple(f"{x}" for x in ["killall java"])
 
     @classmethod
     def on_load(cls) -> None:
